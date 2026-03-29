@@ -1,0 +1,264 @@
+/* ===== EXPERIENCE PAGE ===== */
+.experience-page {
+  min-height: calc(100vh - 70px);
+}
+
+.page-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  text-align: center;
+  background: linear-gradient(135deg, #00d9ff, #a855f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.5rem;
+}
+
+.page-subtitle {
+  text-align: center;
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto 3rem;
+}
+
+/* ===== TIMELINE ===== */
+.timeline {
+  position: relative;
+  padding: 2rem 0;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--primary), var(--accent-purple), transparent);
+  transform: translateX(-1px);
+}
+
+.timeline-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+  align-items: center;
+  animation: slideUp 0.6s ease-out both;
+  animation-delay: calc(var(--index) * 0.1s);
+}
+
+.timeline-item:nth-child(odd) {
+  direction: rtl;
+}
+
+.timeline-item:nth-child(odd) > * {
+  direction: ltr;
+}
+
+.timeline-marker {
+  position: absolute;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--primary);
+  border: 4px solid var(--bg-dark);
+  transform: translateX(-50%);
+  box-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+  z-index: 10;
+}
+
+.experience-card {
+  position: relative;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.card-header h3 {
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.company-name {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background: rgba(0, 217, 255, 0.1);
+  color: var(--primary);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.card-dates {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.date-range {
+  color: var(--text-tertiary);
+  font-weight: 600;
+}
+
+.card-description {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ===== ACHIEVEMENTS ===== */
+.achievements {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.achievements h4 {
+  margin: 0 0 0.5rem 0;
+  color: var(--primary);
+  font-size: 0.95rem;
+}
+
+.achievement-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.achievement-list li {
+  padding-left: 1.75rem;
+  position: relative;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.achievement-list li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--primary);
+  font-weight: bold;
+}
+
+/* ===== METRICS ===== */
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(0, 217, 255, 0.05);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(0, 217, 255, 0.1);
+}
+
+.metric-item {
+  text-align: center;
+}
+
+.metric-value {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.metric-label {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+  margin-top: 0.25rem;
+}
+
+/* ===== TECH AREA ===== */
+.tech-area h4 {
+  margin: 0 0 0.75rem 0;
+  color: var(--primary);
+  font-size: 0.95rem;
+}
+
+.tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tech-tags .badge {
+  font-size: 0.75rem;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .timeline::before {
+    left: 0;
+  }
+
+  .timeline-item {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .timeline-item:nth-child(odd) {
+    direction: ltr;
+  }
+
+  .timeline-marker {
+    left: 0;
+    width: 16px;
+    height: 16px;
+  }
+
+  .card-header {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-title {
+    font-size: 1.75rem;
+  }
+
+  .timeline {
+    padding: 1rem 0;
+  }
+
+  .timeline::before {
+    left: -3px;
+  }
+
+  .timeline-item {
+    margin-bottom: 2rem;
+  }
+
+  .timeline-marker {
+    width: 14px;
+    height: 14px;
+  }
+
+  .experience-card {
+    padding: 1.5rem;
+  }
+
+  .metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .achievement-list li {
+    font-size: 0.9rem;
+  }
+}

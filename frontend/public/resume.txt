@@ -1,0 +1,81 @@
+================================================================================
+                        GOUTHAM DARAPOGU
+                Full-Stack Software Engineer + Data Engineer
+================================================================================
+
+Email: darapogugoutham@gmail.com | Phone: (361) 696-5492
+GitHub: github.com/darapogugoutham | LinkedIn: linkedin.com/in/goutham-darapogu-184004219
+
+================================================================================
+PROFESSIONAL SUMMARY
+================================================================================
+
+Full-Stack Software Engineer and Data Engineer with expertise in building scalable
+applications across cloud platforms. Demonstrated proficiency in React, TypeScript,
+Node.js, Python, and machine learning technologies. Proven track record of designing
+and implementing complex systems that drive business impact.
+
+================================================================================
+CORE COMPETENCIES
+================================================================================
+
+Programming Languages: JavaScript, TypeScript, Python, Java
+Frontend: React, React Router, Three.js, CSS/SCSS
+Backend: Node.js, Express.js, REST APIs, Microservices
+Cloud Platforms: AWS, Azure, GCP, Multi-cloud architecture
+Database: MongoDB, PostgreSQL, MySQL
+Data Science & ML: PyTorch, scikit-learn, LightGBM, CNN, Computer Vision
+DevOps & Tools: Docker, Git, CI/CD, Agile methodology
+Other: Machine Learning, TypeScript, Computer Vision, Deep Learning
+
+================================================================================
+FEATURED PROJECTS
+================================================================================
+
+Multi-Cloud Resource Allocation App
+- Optimized resource allocation and performance monitoring across AWS, Azure, and GCP
+- Built with React, TypeScript, Node.js for real-time analytics dashboard
+- Reduced cloud costs by enabling intelligent resource distribution
+
+Learnova - AI-Powered Learning Platform
+- Full-stack platform for AI-assisted learning and document processing
+- Features: Document summarization, quiz generation, flashcards, AI chatbot
+- Tech Stack: React, Python, LLMs, Node.js, AI integration
+
+Bone Fracture Detection System
+- Deep learning application for automated detection of bone fractures in X-ray images
+- Achieved 94%+ accuracy using ensemble CNN models (ResNet, EfficientNet)
+- Implemented using PyTorch with Computer Vision techniques
+
+Network Failure Detection ML Pipeline
+- Predictive machine learning system for network failure forecasting
+- Tech Stack: Python, scikit-learn, LightGBM classification models
+- Real-time metrics analysis for telecommunications infrastructure
+
+================================================================================
+TECHNICAL SKILLS OVERVIEW
+================================================================================
+
+• Full-Stack Development: React, Node.js, Express, REST APIs
+• Data Engineering: Data processing, pipeline architecture, cloud data platforms
+• Machine Learning: PyTorch, scikit-learn, LightGBM, CNN architectures
+• Cloud Architecture: Multi-cloud deployment strategies
+• Software Engineering: OOP, Design Patterns, Clean Code, Testing
+
+================================================================================
+EDUCATION
+================================================================================
+
+M.S. in Computer Science
+Bachelor's Degree in Computer Science
+
+================================================================================
+ADDITIONAL INFORMATION
+================================================================================
+
+• Open to full-time opportunities
+• Available for freelance and collaborative projects
+• Interested in exploring innovative technologies and challenging problems
+• Continuously learning and staying updated with latest industry trends
+
+================================================================================
