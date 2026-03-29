@@ -123,9 +123,6 @@ function AIAssistant({ isOpen, setIsOpen }) {
                     className="quick-btn"
                     onClick={() => {
                       setInput(question);
-                      const event = new KeyboardEvent('keypress', {
-                        key: 'Enter',
-                      });
                       setTimeout(() => {
                         setInput('');
                         handleSendMessage();
