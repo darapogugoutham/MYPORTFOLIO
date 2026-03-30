@@ -105,10 +105,13 @@ const sanitizeInput = (input) => {
 
 app.use(validateInput);
 
-// Initialize OpenAI
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+// Initialize OpenAI (optional - only if API key is provided)
+let openai = null;
+if (process.env.OPENAI_API_KEY) {
+  openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY,
+  });
+}
 
 // ============ API ENDPOINTS ============
 app.get('/api/data', (req, res) => {
@@ -185,6 +188,13 @@ app.get('/api/visitors-count', (req, res) => {
 app.post('/api/chat', chatLimiter, async (req, res) => {
   try {
     const { message } = req.body;
+
+    // If OpenAI is not configured, return a friendly message
+    if (!openai) {
+      return res.json({
+        message: "Thanks for reaching out! The AI assistant isn't configured right now, but you can still contact me directly through the contact form. Feel free to ask about my experience on the other pages!",
+      });
+    }
     
     const systemPrompt = `You are an AI assistant representing Goutham Darapogu, a Software Engineer, Data Engineer, and ML Builder. 
     Here is Goutham's portfolio information:
