@@ -43,7 +43,7 @@ app.use(helmet({
 // CORS configuration - restrict to trusted origins
 const corsOptions = {
   origin: process.env.NODE_ENV === 'production' 
-    ? ['https://yourdomain.com', 'https://www.yourdomain.com']
+    ? ['https://goutham-myportfolio.vercel.app', 'https://*.vercel.app']
     : ['http://localhost:3000', 'http://localhost:3002'],
   credentials: true,
   methods: ['GET', 'POST', 'OPTIONS'],
