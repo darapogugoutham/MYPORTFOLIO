@@ -2,13 +2,15 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './AboutPage.css';
 
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:4000';
+
 function AboutPage() {
   const [about, setAbout] = useState(null);
 
   useEffect(() => {
     const fetchAbout = async () => {
       try {
-        const response = await axios.get('/api/about');
+        const response = await axios.get(`${API_BASE_URL}/api/about`);
         setAbout(response.data);
       } catch (error) {
         console.error('Error fetching about:', error);

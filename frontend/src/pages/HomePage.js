@@ -9,6 +9,9 @@ import SecurityBadges from '../components/SecurityBadges';
 import VisitorCounter from '../components/VisitorCounter';
 import './HomePage.css';
 
+// Configure API base URL
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:4000';
+
 function HomePage() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -92,9 +95,9 @@ function HomePage() {
     const fetchStats = async () => {
       try {
         const [dataRes, experienceRes, skillsRes] = await Promise.all([
-          axios.get('/api/data'),
-          axios.get('/api/experience'),
-          axios.get('/api/skills'),
+          axios.get(`${API_BASE_URL}/api/data`),
+          axios.get(`${API_BASE_URL}/api/experience`),
+          axios.get(`${API_BASE_URL}/api/skills`),
         ]);
 
         // Count total projects

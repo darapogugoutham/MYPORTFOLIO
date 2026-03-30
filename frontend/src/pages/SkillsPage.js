@@ -2,13 +2,15 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './SkillsPage.css';
 
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:4000';
+
 function SkillsPage() {
   const [skills, setSkills] = useState(null);
 
   useEffect(() => {
     const fetchSkills = async () => {
       try {
-        const response = await axios.get('/api/skills');
+        const response = await axios.get(`${API_BASE_URL}/api/skills`);
         setSkills(response.data);
       } catch (error) {
         console.error('Error fetching skills:', error);
