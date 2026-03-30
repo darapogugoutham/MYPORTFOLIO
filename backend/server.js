@@ -113,6 +113,23 @@ if (process.env.OPENAI_API_KEY) {
   });
 }
 
+// ============ ROOT ENDPOINT ============
+app.get('/', (req, res) => {
+  res.json({
+    message: 'Goutham Darapogu Portfolio API',
+    status: 'running',
+    version: '1.0.0',
+    endpoints: {
+      data: '/api/data',
+      projects: '/api/projects',
+      experience: '/api/experience',
+      skills: '/api/skills',
+      contact: '/api/contact (POST)',
+      chat: '/api/chat (POST)',
+    }
+  });
+});
+
 // ============ API ENDPOINTS ============
 app.get('/api/data', (req, res) => {
   res.json(portfolioData);
