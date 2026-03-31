@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import VisitorCounter from './components/VisitorCounter';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import ExperiencePage from './pages/ExperiencePage';
@@ -58,7 +57,6 @@ function App() {
           </Routes>
         </main>
         <AIAssistant isOpen={showAI} setIsOpen={setShowAI} />
-        <VisitorCounter />
       </div>
     </Router>
   );

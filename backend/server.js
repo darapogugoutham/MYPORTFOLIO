@@ -196,51 +196,6 @@ app.get('/api/certifications', (req, res) => {
   res.json(portfolioData.certifications);
 });
 
-// Visitor Counter endpoint
-app.get('/api/visitors', (req, res) => {
-  const visitorsFile = path.join(__dirname, 'data', 'visitors.json');
-  
-  try {
-    let data = { count: 0 };
-    
-    // Read existing count
-    if (fs.existsSync(visitorsFile)) {
-      const fileContent = fs.readFileSync(visitorsFile, 'utf8');
-      data = JSON.parse(fileContent);
-    }
-    
-    // Increment count
-    data.count += 1;
-    data.lastUpdated = new Date().toISOString();
-    
-    // Write back to file
-    fs.writeFileSync(visitorsFile, JSON.stringify(data, null, 2));
-    
-    res.json({ visitors: data.count });
-  } catch (error) {
-    console.error('Error updating visitor count:', error);
-    res.json({ visitors: 0 });
-  }
-});
-
-app.get('/api/visitors-count', (req, res) => {
-  const visitorsFile = path.join(__dirname, 'data', 'visitors.json');
-  
-  try {
-    if (fs.existsSync(visitorsFile)) {
-      const fileContent = fs.readFileSync(visitorsFile, 'utf8');
-      const data = JSON.parse(fileContent);
-      res.json({ visitors: data.count });
-    } else {
-      res.json({ visitors: 0 });
-    }
-  } catch (error) {
-    console.error('Error reading visitor count:', error);
-    res.json({ visitors: 0 });
-  }
-});
-
-// AI Assistant endpoint
 // AI Assistant endpoint with rate limiting
 app.post('/api/chat', chatLimiter, async (req, res) => {
   try {
