@@ -156,6 +156,15 @@ app.get('/', (req, res) => {
   });
 });
 
+// ============ HEALTH CHECK ENDPOINT (for keep-alive pings) ============
+app.get('/api/health', (req, res) => {
+  res.status(200).json({ 
+    status: 'ok', 
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime() 
+  });
+});
+
 // ============ API ENDPOINTS ============
 app.get('/api/data', (req, res) => {
   res.json(portfolioData);
