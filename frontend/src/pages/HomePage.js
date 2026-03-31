@@ -92,13 +92,18 @@ function HomePage() {
 
   // Fetch portfolio data and calculate stats dynamically
   useEffect(() => {
-    const fetchStats = async () => {
+    const fetchStats = async (retries = 3) => {
       try {
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 8000); // 8 second timeout
+        
         const [dataRes, experienceRes, skillsRes] = await Promise.all([
-          axios.get(`${API_BASE_URL}/api/data`),
-          axios.get(`${API_BASE_URL}/api/experience`),
-          axios.get(`${API_BASE_URL}/api/skills`),
+          axios.get(`${API_BASE_URL}/api/data`, { signal: controller.signal }),
+          axios.get(`${API_BASE_URL}/api/experience`, { signal: controller.signal }),
+          axios.get(`${API_BASE_URL}/api/skills`, { signal: controller.signal }),
         ]);
+        
+        clearTimeout(timeout);
 
         // Count total projects
         const projectCount = dataRes.data.projects?.length || 7;
@@ -164,6 +169,14 @@ function HomePage() {
         });
       } catch (error) {
         console.error('Error fetching stats:', error);
+        
+        // If it's a timeout/network error and we have retries left, try again
+        if (retries > 0 && (error.code === 'ECONNABORTED' || error.message === 'Network Error')) {
+          console.log(`Server warming up... Retrying in ${(4 - retries) * 2}s (${3 - retries + 1}/3)`);
+          setTimeout(() => fetchStats(retries - 1), (4 - retries) * 2000);
+          return;
+        }
+        
         // Fallback to default values
         setStats({
           projects: 6,
