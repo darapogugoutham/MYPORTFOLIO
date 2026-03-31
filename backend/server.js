@@ -59,11 +59,18 @@ const corsOptions = {
     }
   },
   credentials: true,
-  methods: ['GET', 'POST', 'OPTIONS'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-  maxAge: 3600,
+  exposedHeaders: ['Content-Length', 'X-JSON-Response'],
+  maxAge: 86400, // 24 hours
+  optionsSuccessStatus: 200, // For legacy browsers
 };
+
+// Apply CORS middleware EARLY - before any routes
 app.use(cors(corsOptions));
+
+// Preflight handler
+app.options('*', cors(corsOptions));
 
 // Rate limiting - prevent abuse
 const generalLimiter = rateLimit({
