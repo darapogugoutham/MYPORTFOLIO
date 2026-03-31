@@ -19,7 +19,7 @@ const portfolioData = {
     stats: [
       { label: 'Projects', value: '20+' },
       { label: 'Technologies', value: '15+' },
-      { label: 'Years Experience', value: '2+' },
+      { label: 'Years Experience', value: '2.3+' },
       { label: 'Open Source', value: 'Active' },
     ],
   },

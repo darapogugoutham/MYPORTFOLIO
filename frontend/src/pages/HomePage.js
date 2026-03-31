@@ -129,9 +129,10 @@ function HomePage() {
               const monthYearRegex = /(\w+)\s+(\d{4})/;
               
               const startMatch = dateParts[0].trim().match(monthYearRegex);
-              const endMatch = dateParts[1].trim().match(monthYearRegex);
+              const endPart = dateParts[1].trim().toLowerCase();
+              const endMatch = endPart.match(monthYearRegex);
               
-              if (startMatch && endMatch) {
+              if (startMatch) {
                 const monthNames = {
                   'jan': 0, 'feb': 1, 'mar': 2, 'apr': 3, 'may': 4, 'jun': 5,
                   'jul': 6, 'aug': 7, 'sep': 8, 'sept': 8, 'oct': 9, 'nov': 10, 'dec': 11
@@ -142,8 +143,9 @@ function HomePage() {
                 const startDate = new Date(startYear, startMonth, 1);
                 
                 let endDate;
-                if (dateParts[1].toLowerCase().includes('present')) {
-                  endDate = new Date(); // Current date
+                // Check if end date contains "present" (case-insensitive)
+                if (endPart.includes('present') || endPart === 'present') {
+                  endDate = new Date(); // Today's date
                 } else if (endMatch) {
                   const endMonth = monthNames[endMatch[1].toLowerCase()];
                   const endYear = parseInt(endMatch[2], 10);
