@@ -14,8 +14,45 @@ dotenv.config();
 
 const app = express();
 
-// ============ SECURITY LAYER 1: TRANSPORT & HEADERS ============
+// ============ SECURITY LAYER 1: CORS (MUST BE FIRST) ============
+// Define allowed origins
+const allowedOrigins = [
+  'http://localhost:3000',
+  'http://localhost:3002',
+  'http://localhost:4000',
+  'https://goutham-dev.vercel.app',
+  'https://goutham-myportfolio.vercel.app'
+];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    
+    // Check if origin is in whitelist or is a Vercel preview branch
+    if (allowedOrigins.indexOf(origin) !== -1 || origin.endsWith('.vercel.app')) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  exposedHeaders: ['Content-Length', 'X-JSON-Response'],
+  maxAge: 86400, // 24 hours
+  optionsSuccessStatus: 200 
+};
+
+// Apply CORS middleware FIRST - before any other middleware
+app.use(cors(corsOptions));
+
+// Handle Preflight requests globally
+app.options('*', cors(corsOptions));
+
+// ============ SECURITY LAYER 2: TRANSPORT & HEADERS ============
 // Helmet helps secure Express apps by setting various HTTP headers
+// MUST come AFTER CORS to avoid interfering with CORS headers
 app.use(helmet({
   contentSecurityPolicy: {
     directives: {
@@ -39,38 +76,7 @@ app.use(helmet({
   frameguard: { action: 'deny' },
 }));
 
-// ============ SECURITY LAYER 2: CORS & RATE LIMITING ============
-// CORS configuration - allow all Vercel deployments and localhost
-const corsOptions = {
-  origin: function (origin, callback) {
-    const allowedOrigins = [
-      'http://localhost:3000',
-      'http://localhost:3002',
-      'http://localhost:4000',
-      'https://goutham-dev.vercel.app',
-      'https://goutham-myportfolio.vercel.app',
-    ];
-    
-    // Allow all *.vercel.app domains (for preview deployments)
-    if (!origin || origin.includes('vercel.app') || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  exposedHeaders: ['Content-Length', 'X-JSON-Response'],
-  maxAge: 86400, // 24 hours
-  optionsSuccessStatus: 200, // For legacy browsers
-};
-
-// Apply CORS middleware EARLY - before any routes
-app.use(cors(corsOptions));
-
-// Preflight handler
-app.options('*', cors(corsOptions));
+// ============ SECURITY LAYER 3: RATE LIMITING ============
 
 // Rate limiting - prevent abuse
 const generalLimiter = rateLimit({
@@ -97,7 +103,7 @@ const chatLimiter = rateLimit({
 
 app.use('/api/', generalLimiter);
 
-// ============ SECURITY LAYER 3: BODY PARSING & VALIDATION ============
+// ============ SECURITY LAYER 4: BODY PARSING & VALIDATION ============
 app.use(bodyParser.json({ limit: '10kb' })); // limit request size
 app.use(bodyParser.urlencoded({ extended: true, limit: '10kb' }));
 
