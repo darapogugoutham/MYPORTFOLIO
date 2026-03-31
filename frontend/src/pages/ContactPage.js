@@ -3,6 +3,8 @@ import axios from 'axios';
 import { FiGithub, FiLinkedin, FiMail, FiPhone } from 'react-icons/fi';
 import './ContactPage.css';
 
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:4000';
+
 function ContactPage() {
   const [formData, setFormData] = useState({
     name: '',
@@ -25,7 +27,7 @@ function ContactPage() {
     setLoading(true);
 
     try {
-      await axios.post('/api/contact', formData);
+      await axios.post(`${API_BASE_URL}/api/contact`, formData);
       setSuccess(true);
       setFormData({ name: '', email: '', message: '' });
       setTimeout(() => setSuccess(false), 5000);

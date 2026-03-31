@@ -3,6 +3,8 @@ import axios from 'axios';
 import { FiX, FiSend } from 'react-icons/fi';
 import './AIAssistant.css';
 
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:4000';
+
 function AIAssistant({ isOpen, setIsOpen }) {
   const [messages, setMessages] = useState([
     {
@@ -43,7 +45,7 @@ function AIAssistant({ isOpen, setIsOpen }) {
     ]);
 
     try {
-      const response = await axios.post('/api/chat', {
+      const response = await axios.post(`${API_BASE_URL}/api/chat`, {
         message: userMessage,
       });
 

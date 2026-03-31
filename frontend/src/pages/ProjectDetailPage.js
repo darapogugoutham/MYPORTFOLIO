@@ -4,6 +4,8 @@ import axios from 'axios';
 import { FiGithub, FiExternalLink } from 'react-icons/fi';
 import './ProjectDetailPage.css';
 
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:4000';
+
 function ProjectDetailPage() {
   const { id } = useParams();
   const [project, setProject] = React.useState(null);
@@ -12,7 +14,7 @@ function ProjectDetailPage() {
   useEffect(() => {
     const fetchProject = async () => {
       try {
-        const response = await axios.get(`/api/projects/${id}`);
+        const response = await axios.get(`${API_BASE_URL}/api/projects/${id}`);
         setProject(response.data);
       } catch (error) {
         console.error('Error fetching project:', error);
