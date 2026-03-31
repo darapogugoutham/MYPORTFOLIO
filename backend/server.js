@@ -150,6 +150,7 @@ app.get('/', (req, res) => {
       projects: '/api/projects',
       experience: '/api/experience',
       skills: '/api/skills',
+      certifications: '/api/certifications',
       contact: '/api/contact (POST)',
       chat: '/api/chat (POST)',
     }
@@ -189,6 +190,10 @@ app.get('/api/experience', (req, res) => {
 
 app.get('/api/skills', (req, res) => {
   res.json(portfolioData.skills);
+});
+
+app.get('/api/certifications', (req, res) => {
+  res.json(portfolioData.certifications);
 });
 
 // Visitor Counter endpoint

@@ -8,6 +8,7 @@ import ExperiencePage from './pages/ExperiencePage';
 import ProjectsPage from './pages/ProjectsPage';
 import ProjectDetailPage from './pages/ProjectDetailPage';
 import SkillsPage from './pages/SkillsPage';
+import CertificationsPage from './pages/CertificationsPage';
 import ContactPage from './pages/ContactPage';
 import AIAssistant from './components/AIAssistant';
 import './styles/App.css';
@@ -52,6 +53,7 @@ function App() {
             <Route path="/projects" element={<ProjectsPage />} />
             <Route path="/project/:id" element={<ProjectDetailPage />} />
             <Route path="/skills" element={<SkillsPage />} />
+            <Route path="/certifications" element={<CertificationsPage />} />
             <Route path="/contact" element={<ContactPage />} />
           </Routes>
         </main>
