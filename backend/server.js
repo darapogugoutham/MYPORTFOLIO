@@ -40,11 +40,24 @@ app.use(helmet({
 }));
 
 // ============ SECURITY LAYER 2: CORS & RATE LIMITING ============
-// CORS configuration - restrict to trusted origins
+// CORS configuration - allow all Vercel deployments and localhost
 const corsOptions = {
-  origin: process.env.NODE_ENV === 'production' 
-    ? ['https://goutham-myportfolio.vercel.app', 'https://*.vercel.app']
-    : ['http://localhost:3000', 'http://localhost:3002'],
+  origin: function (origin, callback) {
+    const allowedOrigins = [
+      'http://localhost:3000',
+      'http://localhost:3002',
+      'http://localhost:4000',
+      'https://goutham-dev.vercel.app',
+      'https://goutham-myportfolio.vercel.app',
+    ];
+    
+    // Allow all *.vercel.app domains (for preview deployments)
+    if (!origin || origin.includes('vercel.app') || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
