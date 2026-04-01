@@ -6,14 +6,53 @@ const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:4000';
 
 function AboutPage() {
   const [about, setAbout] = useState(null);
+  const [dynamicStats, setDynamicStats] = useState(null);
 
   useEffect(() => {
     const fetchAbout = async () => {
       try {
-        const response = await axios.get(`${API_BASE_URL}/api/about`);
-        setAbout(response.data);
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 8000);
+        
+        const [aboutRes, dataRes, skillsRes] = await Promise.all([
+          axios.get(`${API_BASE_URL}/api/about`, { signal: controller.signal }),
+          axios.get(`${API_BASE_URL}/api/data`, { signal: controller.signal }),
+          axios.get(`${API_BASE_URL}/api/skills`, { signal: controller.signal }),
+        ]);
+        
+        clearTimeout(timeout);
+
+        // Count actual projects
+        const projectCount = dataRes.data.projects?.length || 7;
+
+        // Count unique technologies
+        const allTechs = new Set();
+        if (typeof skillsRes.data === 'object') {
+          Object.values(skillsRes.data).forEach((categoryArray) => {
+            if (Array.isArray(categoryArray)) {
+              categoryArray.forEach((tech) => allTechs.add(tech));
+            }
+          });
+        }
+        const techCount = allTechs.size || 25;
+
+        setAbout(aboutRes.data);
+        setDynamicStats([
+          { label: 'Projects', value: projectCount.toString() },
+          { label: 'Technologies', value: techCount.toString() },
+          { label: 'Years Experience', value: '2.3+' },
+          { label: 'Open Source', value: 'Active' },
+        ]);
       } catch (error) {
         console.error('Error fetching about:', error);
+        // Fallback to static about data if API fails
+        try {
+          const response = await axios.get(`${API_BASE_URL}/api/about`);
+          setAbout(response.data);
+          setDynamicStats(response.data.stats);
+        } catch (fallbackError) {
+          console.error('Fallback error:', fallbackError);
+        }
       }
     };
 
@@ -68,7 +107,7 @@ function AboutPage() {
             <div className="stats-card card fade-in">
               <h3>Quick Stats</h3>
               <div className="stats-list">
-                {about.stats.map((stat, idx) => (
+                {(dynamicStats || about?.stats || []).map((stat, idx) => (
                   <div key={idx} className="stat">
                     <span className="stat-value">{stat.value}</span>
                     <span className="stat-name">{stat.label}</span>

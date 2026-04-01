@@ -17,8 +17,8 @@ const portfolioData = {
       'Research and analytics automation',
     ],
     stats: [
-      { label: 'Projects', value: '20+' },
-      { label: 'Technologies', value: '15+' },
+      { label: 'Projects', value: '7' },
+      { label: 'Technologies', value: '25+' },
       { label: 'Years Experience', value: '2.3+' },
       { label: 'Open Source', value: 'Active' },
     ],
