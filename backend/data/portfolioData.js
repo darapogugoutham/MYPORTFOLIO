@@ -162,12 +162,12 @@ const portfolioData = {
       problem: 'Manual X-ray analysis by radiologists is time-consuming and subject to human error. Need for automated initial screening.',
       role: 'ML engineer - data preprocessing, model selection, training, and evaluation',
       approach: 'Built CNN ensemble combining ResNet50 and DenseNet121 for robust predictions. Implemented data augmentation for diverse training samples. Used transfer learning to leverage pre-trained models.',
-      impact: 'Achieved 89% accuracy with high precision, reducing radiologist workload',
+      impact: 'Achieved 76% accuracy for fracture detection, enabling reliable initial screening assistance',
       technologies: ['PyTorch', 'CNN', 'ResNet', 'DenseNet', 'OpenCV', 'Python'],
       results: [
-        { metric: 'Detection Accuracy', change: '89%' },
-        { metric: 'Precision', change: '91%' },
-        { metric: 'F1-Score', change: '0.87' },
+        { metric: 'Detection Accuracy', change: '76%' },
+        { metric: 'Precision', change: '78%' },
+        { metric: 'F1-Score', change: '0.74' },
       ],
       modelDetails: {
         architecture: 'Ensemble of ResNet50 + DenseNet121',
