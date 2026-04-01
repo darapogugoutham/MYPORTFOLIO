@@ -21,6 +21,12 @@
   cursor: pointer;
 }
 
+@media (max-width: 768px) {
+  .ai-toggle {
+    display: none !important;
+  }
+}
+
 .ai-toggle:hover {
   transform: scale(1.1);
   box-shadow: 0 0 30px rgba(168, 85, 247, 0.8);
@@ -52,6 +58,12 @@
   z-index: 998;
   animation: slideUp 0.3s ease-out;
   overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .ai-assistant {
+    display: none !important;
+  }
 }
 
 /* Header */

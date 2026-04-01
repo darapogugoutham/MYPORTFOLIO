@@ -6,7 +6,6 @@ import ProjectModal from '../components/ProjectModal';
 import AnimatedCounter from '../components/AnimatedCounter';
 import GalaxySection from '../components/GalaxySection';
 import SecurityBadges from '../components/SecurityBadges';
-import VisitorCounter from '../components/VisitorCounter';
 import './HomePage.css';
 
 // Configure API base URL
@@ -271,9 +270,6 @@ function HomePage() {
         project={selectedProject}
         onClose={handleCloseModal}
       />
-
-      {/* Visitor Counter */}
-      <VisitorCounter />
     </div>
   );
 }
