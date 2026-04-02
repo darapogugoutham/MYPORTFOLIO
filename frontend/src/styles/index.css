@@ -5,14 +5,15 @@
 }
 
 :root {
-  --bg-dark: #0a0e27;
-  --bg-darker: #050810;
-  --primary-blue: #00d4ff;
-  --primary-purple: #a855f7;
-  --accent-cyan: #06b6d4;
-  --text-light: #f0f0f0;
-  --text-muted: #9ca3af;
-  --card-bg: rgba(15, 23, 42, 0.7);
+  /* PALETTE: Navy & Slate Combo (Trust & Logic) */
+  --bg-dark: #1a1a40;
+  --bg-darker: #0f1425;
+  --primary-blue: #3b82f6;
+  --primary-purple: #64748b;
+  --accent-cyan: #0ea5e9;
+  --text-light: #f8fafc;
+  --text-muted: #cbd5e1;
+  --card-bg: rgba(37, 43, 94, 0.5);
 }
 
 html {
