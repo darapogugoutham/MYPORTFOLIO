@@ -1,22 +1,22 @@
 /* ===== ROOT VARIABLES & DESIGN SYSTEM ===== */
-/* PALETTE: Navy & Slate Combo (Trust & Logic) */
+/* PALETTE: Deep Purple & Gold (Premium Creative) */
 :root {
   /* Colors */
-  --bg-dark: #1a1a40;
-  --bg-darker: #0f1425;
-  --bg-secondary: #252b5e;
-  --primary: #3b82f6;
-  --primary-dark: #1e40af;
-  --accent-purple: #64748b;
-  --accent-blue: #0ea5e9;
-  --text-primary: #f8fafc;
-  --text-secondary: #cbd5e1;
-  --text-tertiary: #94a3b8;
+  --bg-dark: #2d1b69;
+  --bg-darker: #1a0f3f;
+  --bg-secondary: #3d2680;
+  --primary: #d4af37;
+  --primary-dark: #b8941f;
+  --accent-purple: #a78bfa;
+  --accent-blue: #9f7aea;
+  --text-primary: #f3f4f6;
+  --text-secondary: #e9d5ff;
+  --text-tertiary: #d8b4fe;
   --success: #10b981;
   --warning: #f59e0b;
   --danger: #ef4444;
-  --glow: rgba(59, 130, 246, 0.2);
-  --glow-purple: rgba(100, 116, 139, 0.15);
+  --glow: rgba(212, 175, 55, 0.2);
+  --glow-purple: rgba(167, 139, 250, 0.3);
   
   /* Spacing */
   --spacing-xs: 0.5rem;

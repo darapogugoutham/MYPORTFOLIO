@@ -49,4 +49,35 @@ Documented: April 1, 2026
 - Secondary: Light Gray (#f3f4f6)
 
 ---
+
+## Creative Edge Palettes (Design & Marketing)
+
+### Palette 3: Mocha & Cream (Editorial Sophistication)
+**Vibe:** High-end, editorial, sophisticated
+- Background: #2c2416 (Mocha Mousse)
+- Accent Primary: #d4a574 (Warm Cream)
+- Accent Secondary: #f5e6d3 (Soft Cream)
+- Text: #f5e6d3
+- Status: Not Applied
+
+### Palette 4: Deep Purple & Gold (Premium Quality) ⭐ CURRENT
+**Vibe:** Premium, luxury-tier, professionally creative
+- Background: #2d1b69 (Deep Purple)
+- Background Secondary: #1a0f3f (Darker Purple)
+- Primary: #d4af37 (Gold)
+- Accent: #a78bfa (Light Purple)
+- Text: #f3f4f6 (Off-white)
+- Glows: Gold with purple accents
+- Status: APPLIED (April 1, 2026)
+
+### Palette 5: Mermaidcore Gradients (2026 Trending)
+**Vibe:** Modern, pearlescent, forward-thinking
+- Background: #0f3860 (Deep Teal)
+- Primary: #06d6d0 (Soft Teal)
+- Accent: #a78bfa (Pearlescent Purple)
+- Secondary: #c8b6ff (Light Purple)
+- Text: #f0f9ff
+- Status: Not Applied
+
+---
 **To Revert:** Use the CSS values documented above in both App.css and index.css
