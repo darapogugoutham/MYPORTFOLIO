@@ -39,9 +39,26 @@ function ExperiencePage() {
                   <span className="company-name">{job.company}</span>
                 </div>
 
+                <div className="card-meta">
+                  {job.employmentType && (
+                    <span className="meta-item employment-type">{job.employmentType}</span>
+                  )}
+                  {job.locationType && (
+                    <span className="meta-item location-type">{job.locationType}</span>
+                  )}
+                </div>
+
                 <div className="card-dates">
                   <span className="date-range">{job.dates}</span>
+                  {job.duration && <span className="duration">{job.duration}</span>}
                 </div>
+
+                {job.location && (
+                  <div className="card-location">
+                    <span className="location-icon">📍</span>
+                    <span className="location-text">{job.location}</span>
+                  </div>
+                )}
 
                 <p className="card-description">{job.description}</p>
 

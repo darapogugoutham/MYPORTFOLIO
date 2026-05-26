@@ -95,9 +95,14 @@ function CertificationsPage() {
               )}
 
               {cert.credentialUrl && (
-                <a href={cert.credentialUrl} target="_blank" rel="noopener noreferrer" className="cert-link">
-                  View Credential →
-                </a>
+                <div className="cert-link-container">
+                  <a href={cert.credentialUrl} target="_blank" rel="noopener noreferrer" className={`cert-link ${cert.requiresLogin ? 'requires-login' : ''}`}>
+                    {cert.requiresLogin ? '🔒 View Credential (Login Required)' : 'View Credential →'}
+                  </a>
+                  {cert.requiresLogin && (
+                    <p className="login-notice">This credential requires authentication to view on the issuer's website</p>
+                  )}
+                </div>
               )}
             </div>
           ))

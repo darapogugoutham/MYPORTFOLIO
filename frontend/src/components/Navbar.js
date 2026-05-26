@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FiMenu, FiX, FiGithub, FiLinkedin } from 'react-icons/fi';
 import { MdDownload } from 'react-icons/md';
+import { jsPDF } from 'jspdf';
 import './Navbar.css';
 
 function Navbar() {
@@ -17,13 +18,50 @@ function Navbar() {
     { name: 'Contact', path: '/contact' },
   ];
 
-  const handleResumeDownload = () => {
-    const link = document.createElement('a');
-    link.href = '/resume.txt';
-    link.download = 'Goutham_Darapogu_Resume.txt';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+  const handleResumeDownload = async () => {
+    try {
+      // Fetch the resume text
+      const response = await fetch('/resume.txt');
+      const text = await response.text();
+      
+      // Create PDF document
+      const doc = new jsPDF({
+        orientation: 'portrait',
+        unit: 'mm',
+        format: 'a4'
+      });
+      
+      // Set font properties
+      doc.setFont('courier');
+      doc.setFontSize(10);
+      
+      // Split text into lines and add to PDF
+      const lines = text.split('\n');
+      let yPosition = 10;
+      const pageHeight = doc.internal.pageSize.getHeight();
+      const bottomMargin = 10;
+      
+      lines.forEach((line) => {
+        if (yPosition > pageHeight - bottomMargin) {
+          doc.addPage();
+          yPosition = 10;
+        }
+        doc.text(line, 10, yPosition);
+        yPosition += 4;
+      });
+      
+      // Save the PDF
+      doc.save('Goutham_Resume.pdf');
+    } catch (error) {
+      console.error('Error downloading resume:', error);
+      // Fallback to text download if PDF generation fails
+      const link = document.createElement('a');
+      link.href = '/resume.txt';
+      link.download = 'Goutham_Resume.txt';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
   };
 
   return (

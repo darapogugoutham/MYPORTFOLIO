@@ -21,55 +21,162 @@ function HomePage() {
   });
   const navigate = useNavigate();
   const featuredSectionRef = useRef(null);
+  const carouselRef = useRef(null);
 
   const projects = [
     {
-      id: 1,
-      title: 'Full-Stack E-commerce',
-      description: 'Production-scale booking and order management system',
-      technologies: ['React', 'Node.js', 'MongoDB'],
-      problem: 'Traditional e-commerce systems lack real-time inventory management and scalability for high-traffic scenarios.',
-      solution: 'Built a microservices-based architecture with React frontend, Node.js backend, and MongoDB for real-time data sync. Implemented Stripe integration and Redis caching for performance.',
+      id: 'streamflow',
+      title: 'StreamFlow – Real-Time Data Engineering Platform',
+      description: 'End-to-end real-time data engineering solution for efficient stream processing, workflow orchestration, and analysis.',
+      technologies: ['Kafka', 'Apache Airflow', 'PostgreSQL', 'Streamlit'],
+      problem: 'Organizations struggle with real-time data processing at scale. Need for unified solution combining streaming, orchestration, and visualization.',
+      solution: 'Created end-to-end solution using Kafka for event streaming, Apache Airflow for workflow orchestration, PostgreSQL for storage, and Streamlit for real-time dashboards. Implemented cryptocurrency market data extraction with live streaming.',
       impact: [
-        '50% faster checkout process',
-        'Handles 10K+ concurrent users',
-        '99.9% uptime SLA',
-        'Reduced cart abandonment by 30%'
+        '<100ms processing latency',
+        'Real-time data streaming',
+        '1000s of events/sec',
+        'Live market trend analysis'
       ],
-      liveDemo: '#',
-      github: '#'
+      liveDemo: null,
+      github: 'https://github.com/darapogugoutham/streamflow'
     },
     {
-      id: 2,
-      title: 'Multi-Cloud Optimizer',
-      description: 'Cost optimization across AWS, Azure, and GCP',
-      technologies: ['Docker', 'Kubernetes', 'Cloud'],
-      problem: 'Multi-cloud infrastructure costs spiraling out of control with no unified monitoring or optimization.',
-      solution: 'Created a centralized dashboard using Python backend and React frontend. Implemented ML algorithms to predict usage patterns and auto-scale resources.',
+      id: 'distributed-task-queue',
+      title: 'Distributed Task Queue & Notification System',
+      description: 'Scalable distributed system for asynchronous task processing with FastAPI, Redis, and RabbitMQ.',
+      technologies: ['FastAPI', 'Redis', 'RabbitMQ', 'Docker'],
+      problem: 'Traditional request-response models don\'t handle long-running tasks efficiently. Need for robust async processing with retries and monitoring.',
+      solution: 'Built microservices architecture using FastAPI for API gateway, Redis for caching, RabbitMQ for message queuing, and background workers for task execution. Implemented retry logic, task tracking, and comprehensive monitoring.',
       impact: [
-        '40% reduction in cloud costs',
-        'Automated resource scaling',
-        'Real-time cost analytics',
-        'Multi-cloud visibility'
+        '-90% API response time reduction',
+        '1000+ concurrent tasks handling',
+        '99.9% task success rate',
+        'Automatic retry mechanism'
       ],
-      liveDemo: '#',
-      github: '#'
+      liveDemo: null,
+      github: 'https://github.com/darapogugoutham/distributed-task-queue'
     },
     {
-      id: 3,
-      title: 'Bone Fracture Detection',
-      description: 'Deep learning model for medical image analysis',
-      technologies: ['PyTorch', 'CNN', 'ML'],
-      problem: 'Manual X-ray analysis is time-consuming and prone to human error, delaying critical diagnoses.',
-      solution: 'Developed a CNN model trained on 50K+ X-ray images with 94% accuracy. Deployed as REST API for integration with hospitals.',
+      id: 'insightforge-ai',
+      title: 'InsightForge AI — Multi-Agent RAG Platform',
+      description: 'Enterprise-grade multi-agent RAG platform using LangChain and OpenAI for intelligent document search and knowledge automation.',
+      technologies: ['LangChain', 'OpenAI APIs', 'Pinecone', 'FastAPI'],
+      problem: 'Enterprises struggle to leverage unstructured knowledge. Need for intelligent systems that can search and understand large document repositories.',
+      solution: 'Implemented multi-agent RAG framework using LangChain orchestration, OpenAI embeddings and LLMs, Pinecone vector database for semantic search. Built FastAPI backend with async inferencing pipelines, hallucination detection, and response evaluation.',
       impact: [
-        '94% detection accuracy',
+        '95% query accuracy',
+        '-80% research time saved',
+        '1000s documents indexed',
+        'Autonomous document analysis'
+      ],
+      liveDemo: null,
+      github: 'https://github.com/darapogugoutham/insightforge-ai'
+    },
+    {
+      id: 'multi-cloud-optimizer',
+      title: 'Multi-Cloud Resource Optimizer',
+      description: 'Cloud-based resource optimization tool using Kubernetes for intelligent workload management across AWS and GCP.',
+      technologies: ['Docker', 'Kubernetes', 'AWS', 'GCP'],
+      problem: 'Organizations waste significant cloud resources across multiple providers. Need for intelligent optimization and cost reduction.',
+      solution: 'Created intelligent scheduler using Kubernetes for workload placement optimization. Implemented cost models analyzing pricing across AWS and GCP. Built real-time monitoring with auto-scaling policies and cost tracking.',
+      impact: [
+        '-20% cost reduction',
+        '+35% resource utilization',
+        '-60% setup time',
+        'Multi-cloud flexibility'
+      ],
+      liveDemo: null,
+      github: 'https://github.com/darapogugoutham/multi-cloud-optimizer'
+    },
+    {
+      id: 'agriinsights-etl',
+      title: 'AgriInsights – ETL Pipeline',
+      description: 'End-to-end ETL pipeline extracting, cleaning, and loading agricultural data.',
+      technologies: ['Python', 'PostgreSQL', 'Pandas', 'ETL'],
+      problem: 'Agricultural data needs systematic extraction, transformation, and loading.',
+      solution: 'Built automated ETL workflow with data validation, error handling, and PostgreSQL loading.',
+      impact: [
+        'Automated data processing',
+        'Data quality validation',
+        'Batch optimization'
+      ],
+      liveDemo: null,
+      github: 'https://github.com/darapogugoutham/AgriInsights-ETL-Pipeline'
+    },
+    {
+      id: 'learnova',
+      title: 'Learnova – AI Learning Platform',
+      description: 'AI platform for auto-generating study summaries, quizzes, and flashcards.',
+      technologies: ['React', 'FastAPI', 'OpenAI', 'PostgreSQL'],
+      problem: 'Students spend excessive time creating study materials.',
+      solution: 'Full-stack platform with auto-generation capabilities and progress tracking.',
+      impact: [
+        'Auto-summary generation',
+        'Quiz creation automation',
+        'Progress tracking system'
+      ],
+      liveDemo: null,
+      github: 'https://github.com/darapogugoutham/Learnova'
+    },
+    {
+      id: 'bone-fracture-detection',
+      title: 'Bone Fracture Detection – Medical AI',
+      description: 'Deep learning CNN model for bone fracture detection in X-rays.',
+      technologies: ['PyTorch', 'CNN', 'NumPy', 'OpenCV'],
+      problem: 'Manual X-ray analysis is error-prone and time-consuming.',
+      solution: 'CNN trained on 50K+ images achieving 94% accuracy.',
+      impact: [
+        '94% accuracy rate',
         '10ms inference time',
-        'FDA approved threshold',
-        'Deployed in 5 hospitals'
+        'Real-time detection'
       ],
-      liveDemo: '#',
-      github: '#'
+      liveDemo: null,
+      github: 'https://github.com/darapogugoutham/Bone-fracture-detection'
+    },
+    {
+      id: 'network-failure-detection',
+      title: 'Network Failure Detection',
+      description: 'ML system for detecting network anomalies and failures.',
+      technologies: ['Python', 'Scikit-learn', 'Pandas', 'ML'],
+      problem: 'Network failures cause significant downtime.',
+      solution: 'ML anomaly detection with real-time prediction capabilities.',
+      impact: [
+        'Real-time detection',
+        'Predictive alerts',
+        'Reduced downtime'
+      ],
+      liveDemo: null,
+      github: 'https://github.com/darapogugoutham/Network-failure-detection'
+    },
+    {
+      id: 'emotion-detection-chatbot',
+      title: 'Emotion Detection Chatbot',
+      description: 'Chatbot with emotion detection using sentiment analysis and NLP.',
+      technologies: ['Python', 'NLTK', 'Scikit-learn', 'NLP'],
+      problem: 'Traditional chatbots lack emotional intelligence.',
+      solution: 'Emotion-aware chatbot with context preservation.',
+      impact: [
+        'Emotion-aware responses',
+        'Natural conversation flow',
+        '90% user satisfaction'
+      ],
+      liveDemo: null,
+      github: 'https://github.com/darapogugoutham/Chatbot---emotion-detection-using-sentiment-analysis'
+    },
+    {
+      id: 'anomaly-wastewater',
+      title: 'Wastewater Anomaly Detection',
+      description: 'ML system for detecting anomalies in wastewater treatment.',
+      technologies: ['Python', 'ML', 'IoT', 'Anomaly Detection'],
+      problem: 'Wastewater plants need continuous failure detection.',
+      solution: 'Real-time anomaly detection with automatic alert generation.',
+      impact: [
+        'Real-time monitoring',
+        'Automatic alerts',
+        'Preventive maintenance'
+      ],
+      liveDemo: null,
+      github: 'https://github.com/darapogugoutham/Anamolies-detection-in-waste-water-system'
     }
   ];
 
@@ -86,6 +193,21 @@ function HomePage() {
   const handleExploreWork = () => {
     if (featuredSectionRef.current) {
       featuredSectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  const scrollCarousel = (direction) => {
+    if (carouselRef.current) {
+      const scrollAmount = 400; // Adjust carousel scroll distance
+      const scrollLeft = carouselRef.current.scrollLeft;
+      const targetScroll = direction === 'left' 
+        ? scrollLeft - scrollAmount
+        : scrollLeft + scrollAmount;
+      
+      carouselRef.current.scrollTo({
+        left: targetScroll,
+        behavior: 'smooth'
+      });
     }
   };
 
@@ -220,18 +342,28 @@ function HomePage() {
       {/* Featured Projects Section */}
       <div className="container section-padding featured-section" ref={featuredSectionRef}>
         <h2 className="section-title">Featured Work</h2>
-        <p className="section-subtitle">Click to explore detailed case studies and implementations.</p>
+        <p className="section-subtitle">Explore my portfolio of real-world projects. Click to see detailed case studies.</p>
         
-        <div className="featured-grid">
-          {projects.map((project) => (
-            <InteractiveCard
-              key={project.id}
-              title={project.title}
-              description={project.description}
-              technologies={project.technologies}
-              onCardClick={() => handleCardClick(project)}
-            />
-          ))}
+        <div className="carousel-container">
+          <button className="carousel-arrow carousel-arrow-left" onClick={() => scrollCarousel('left')} aria-label="Previous projects">
+            <span>❮</span>
+          </button>
+          
+          <div className="featured-grid featured-carousel" ref={carouselRef}>
+            {projects.map((project) => (
+              <InteractiveCard
+                key={project.id}
+                title={project.title}
+                description={project.description}
+                technologies={project.technologies}
+                onCardClick={() => handleCardClick(project)}
+              />
+            ))}
+          </div>
+          
+          <button className="carousel-arrow carousel-arrow-right" onClick={() => scrollCarousel('right')} aria-label="Next projects">
+            <span>❯</span>
+          </button>
         </div>
       </div>
 

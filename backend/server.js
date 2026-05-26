@@ -7,8 +7,8 @@ const path = require('path');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const nodemailer = require('nodemailer');
-const { OpenAI } = require('openai');
 const portfolioData = require('./data/portfolioData');
+const { initializeRAG, retrieveRelevantDocs, generateRAGResponse } = require('./services/ragChatbot');
 
 dotenv.config();
 
@@ -131,12 +131,17 @@ const sanitizeInput = (input) => {
 
 app.use(validateInput);
 
-// Initialize OpenAI (optional - only if API key is provided)
-let openai = null;
-if (process.env.OPENAI_API_KEY) {
-  openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
-  });
+// Initialize RAG system for AI chatbot
+let ragDocuments = [];
+let ragInitialized = false;
+
+try {
+  ragDocuments = initializeRAG();
+  ragInitialized = true;
+  console.log('✓ RAG system initialized with', ragDocuments.length, 'documents');
+} catch (error) {
+  console.warn('⚠ RAG system initialization failed:', error.message);
+  ragInitialized = false;
 }
 
 // ============ ROOT ENDPOINT ============
@@ -196,46 +201,32 @@ app.get('/api/certifications', (req, res) => {
   res.json(portfolioData.certifications);
 });
 
-// AI Assistant endpoint with rate limiting
+// AI Assistant endpoint with RAG (Retrieval-Augmented Generation)
 app.post('/api/chat', chatLimiter, async (req, res) => {
   try {
     const { message } = req.body;
 
-    // If OpenAI is not configured, return a friendly message
-    if (!openai) {
+    if (!message || message.trim().length === 0) {
+      return res.status(400).json({ error: 'Message cannot be empty' });
+    }
+
+    if (!ragInitialized || ragDocuments.length === 0) {
       return res.json({
-        message: "Thanks for reaching out! The AI assistant isn't configured right now, but you can still contact me directly through the contact form. Feel free to ask about my experience on the other pages!",
+        message: "Thanks for reaching out! The AI assistant is currently initializing. Please try again in a moment. In the meantime, feel free to explore my portfolio and contact me directly through the contact form!",
       });
     }
     
-    const systemPrompt = `You are an AI assistant representing Goutham Darapogu, a Software Engineer, Data Engineer, and ML Builder. 
-    Here is Goutham's portfolio information:
-    ${JSON.stringify(portfolioData, null, 2)}
+    // Retrieve relevant documents based on the query
+    const relevantDocs = retrieveRelevantDocs(message, ragDocuments, 3);
     
-    Answer questions about Goutham's experience, projects, skills, and background in a friendly, professional manner.
-    Keep responses concise and engaging. Direct users to specific sections or projects when relevant.`;
-
-    const response = await openai.chat.completions.create({
-      model: 'gpt-3.5-turbo',
-      messages: [
-        {
-          role: 'system',
-          content: systemPrompt,
-        },
-        {
-          role: 'user',
-          content: message,
-        },
-      ],
-      max_tokens: 500,
-      temperature: 0.7,
-    });
-
+    // Generate response based on retrieved context
+    const response = generateRAGResponse(message, relevantDocs);
+    
     res.json({
-      message: response.choices[0].message.content,
+      message: response,
     });
   } catch (error) {
-    console.error('Error:', error);
+    console.error('Chat Error:', error);
     res.status(500).json({ error: 'Failed to process message' });
   }
 });

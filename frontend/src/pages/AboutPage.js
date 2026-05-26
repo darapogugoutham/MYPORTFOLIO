@@ -22,27 +22,9 @@ function AboutPage() {
         
         clearTimeout(timeout);
 
-        // Count actual projects
-        const projectCount = dataRes.data.projects?.length || 7;
-
-        // Count unique technologies
-        const allTechs = new Set();
-        if (typeof skillsRes.data === 'object') {
-          Object.values(skillsRes.data).forEach((categoryArray) => {
-            if (Array.isArray(categoryArray)) {
-              categoryArray.forEach((tech) => allTechs.add(tech));
-            }
-          });
-        }
-        const techCount = allTechs.size || 25;
-
         setAbout(aboutRes.data);
-        setDynamicStats([
-          { label: 'Projects', value: projectCount.toString() },
-          { label: 'Technologies', value: techCount.toString() },
-          { label: 'Years Experience', value: '2.3+' },
-          { label: 'Open Source', value: 'Active' },
-        ]);
+        // Use stats from the about data
+        setDynamicStats(aboutRes.data.stats || []);
       } catch (error) {
         console.error('Error fetching about:', error);
         // Fallback to static about data if API fails
@@ -76,7 +58,8 @@ function AboutPage() {
               <div className="education-card card">
                 <h3>{about.education.degree}</h3>
                 <p className="institution">{about.education.school}</p>
-                <p className="year">Graduation: {about.education.year}</p>
+                <p className="gpa">GPA: {about.education.gpa}</p>
+                <p className="year">Graduation: {about.education.endYear}</p>
               </div>
             </section>
 

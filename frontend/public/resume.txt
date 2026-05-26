@@ -1,81 +1,154 @@
 ================================================================================
                         GOUTHAM DARAPOGU
-                Full-Stack Software Engineer + Data Engineer
+                361-696-5492 • darapogugoutham@gmail.com
 ================================================================================
 
-Email: darapogugoutham@gmail.com | Phone: (361) 696-5492
+Portfolio: https://goutham-dev.vercel.app
 GitHub: github.com/darapogugoutham | LinkedIn: linkedin.com/in/goutham-darapogu-184004219
+HackerRank: hackerrank.com/darapogugoutham | LeetCode: leetcode.com/darapogugoutham
 
 ================================================================================
-PROFESSIONAL SUMMARY
+SUMMARY
 ================================================================================
 
-Full-Stack Software Engineer and Data Engineer with expertise in building scalable
-applications across cloud platforms. Demonstrated proficiency in React, TypeScript,
-Node.js, Python, and machine learning technologies. Proven track record of designing
-and implementing complex systems that drive business impact.
-
-================================================================================
-CORE COMPETENCIES
-================================================================================
-
-Programming Languages: JavaScript, TypeScript, Python, Java
-Frontend: React, React Router, Three.js, CSS/SCSS
-Backend: Node.js, Express.js, REST APIs, Microservices
-Cloud Platforms: AWS, Azure, GCP, Multi-cloud architecture
-Database: MongoDB, PostgreSQL, MySQL
-Data Science & ML: PyTorch, scikit-learn, LightGBM, CNN, Computer Vision
-DevOps & Tools: Docker, Git, CI/CD, Agile methodology
-Other: Machine Learning, TypeScript, Computer Vision, Deep Learning
-
-================================================================================
-FEATURED PROJECTS
-================================================================================
-
-Multi-Cloud Resource Allocation App
-- Optimized resource allocation and performance monitoring across AWS, Azure, and GCP
-- Built with React, TypeScript, Node.js for real-time analytics dashboard
-- Reduced cloud costs by enabling intelligent resource distribution
-
-Learnova - AI-Powered Learning Platform
-- Full-stack platform for AI-assisted learning and document processing
-- Features: Document summarization, quiz generation, flashcards, AI chatbot
-- Tech Stack: React, Python, LLMs, Node.js, AI integration
-
-Bone Fracture Detection System
-- Deep learning application for automated detection of bone fractures in X-ray images
-- Achieved 94%+ accuracy using ensemble CNN models (ResNet, EfficientNet)
-- Implemented using PyTorch with Computer Vision techniques
-
-Network Failure Detection ML Pipeline
-- Predictive machine learning system for network failure forecasting
-- Tech Stack: Python, scikit-learn, LightGBM classification models
-- Real-time metrics analysis for telecommunications infrastructure
-
-================================================================================
-TECHNICAL SKILLS OVERVIEW
-================================================================================
-
-• Full-Stack Development: React, Node.js, Express, REST APIs
-• Data Engineering: Data processing, pipeline architecture, cloud data platforms
-• Machine Learning: PyTorch, scikit-learn, LightGBM, CNN architectures
-• Cloud Architecture: Multi-cloud deployment strategies
-• Software Engineering: OOP, Design Patterns, Clean Code, Testing
+Software Engineer with experience in designing and implementing backend systems,
+data engineering pipelines, and cloud-based software systems. Expertise in building
+scalable APIs, distributed computing, and real-time data infrastructure using
+Python and Java with AWS and Kubernetes. Proficient in GenAI, RAG platforms, and
+modern data engineering solutions.
 
 ================================================================================
 EDUCATION
 ================================================================================
 
-M.S. in Computer Science
-Bachelor's Degree in Computer Science
+Masters in Computer Science                                    Aug 2024 - May 2026
+Texas A&M University–Corpus Christi                           GPA: 3.92/4.0
+
+B.Tech in Computer Science Engineering              Aug 2018 - May 2022
+Indian Institute of Information Technology Sri City, Chittoor
 
 ================================================================================
-ADDITIONAL INFORMATION
+WORK EXPERIENCE
 ================================================================================
 
-• Open to full-time opportunities
-• Available for freelance and collaborative projects
-• Interested in exploring innovative technologies and challenging problems
-• Continuously learning and staying updated with latest industry trends
+Graduate Research Assistant, Texas A&M University–Corpus Christi    Sept 2025 - May 2026
+• Extraction and automated processing of 10k+ LinkedIn and SEC documents using Python
+  and Selenium for extensive financial analysis
+• Development of event studies and sentiment analysis pipelines for evaluating investor
+  behavior and layoff trends within the workforce
+• Enhancement of data processing pipelines using Pandas and Regular Expressions,
+  increasing efficiency by 35%
+• Conversion of structured raw data into modelled data, enhancing research effectiveness
+  by 25%
+• GitHub Copilot used to facilitate programming and debug tests performed on code
+
+Student Worker, Texas A&M University–Corpus Christi                Aug 2024 - Jun 2025
+• Created Python-based back-end automation scripts for processing and manipulation of
+  large datasets, which were used in analytics and reporting systems
+• Created data processing pipelines using Extract-Transform-Load pattern, automating
+  processing, validation, and formatting of data sets, increasing scalability by 30%
+• Automated backend processes of report creation and generation through data
+  manipulation using back-end scripting tools
+• Optimized data processing operations through Pandas and Regex for increased
+  efficiency and reliability of workflows
+
+Software Engineer, MBS Software Bangalore                          Sept 2022 - May 2024
+• Developed and maintained backend components for data-driven web applications using
+  Python, APIs, CSV, and JSON-based data integration workflows
+• Optimized queries and multithreading workflows, increasing application performance
+  and efficiency by 25%
+• Designed analytics and report dashboards in Python using Pandas, Matplotlib, and
+  Seaborn
+• Created workflows for logging and monitoring using AWS CloudWatch, saving time in
+  debugging by 20%
+• Enabled data processing and automation pipelines by creating Python workflows for
+  back-end processing
+
+Software Engineer, Cambridge Mobile Telematics                     Jan 2022 - Aug 2022
+• Enhanced web application roles for improved user accessibility, authentication, and
+  access control through Django frameworks
+• Designed and deployed ML-based anomaly detection system using Scikit-learn,
+  minimizing false positives by 15%
+• Deployed containerized and scalable backend applications on Docker and AWS services
+  (EC2, S3) supporting 50K+ users per day
+• Automated CI/CD processes utilizing GitHub Actions, minimizing deployment time by 35%
+• Established logging, monitoring, and debugging processes that improved application
+  reliability by 25%
+
+Machine Learning Volunteer Developer                              Jan 2021 - Dec 2021
+• Created algorithm to detect fake news using Python, Scikit-learn, and NLP techniques
+  with 87% accuracy and lower false positives
+• Created complete pipeline for data cleaning and preprocessing involving vectorization
+  via TF-IDF, text tokenization, and text normalization
+• Created multiple classification algorithms (logistic regression, random forest, SVM)
+  and optimized performance to 87% accuracy
+• Automated data preprocessing using Pandas and NumPy, reducing preprocessing time by 30%
+• Enhanced model performance via hyperparameter tuning, validation testing, and feature
+  selection techniques
+
+================================================================================
+FEATURED PROJECTS
+================================================================================
+
+StreamFlow – Real-Time Data Engineering Platform
+• Created end-to-end real-time data engineering solution using Kafka, Airflow,
+  PostgreSQL, and Streamlit for efficient stream processing and analysis
+• Created pipelines to extract, transform, and load cryptocurrency market data from
+  live data streams with real-time updates
+• Created visual dashboards for analyzing real-time market trends and providing insights
+
+Distributed Task Queue & Notification System
+• Developed distributed system processing tasks using FastAPI, Redis, RabbitMQ,
+  and PostgreSQL for async job execution and notifications
+• Implemented REST APIs, scheduled tasks, retries, and worker functionality for
+  scalable and robust backend
+• Created pipeline for task execution tracking and system performance monitoring using
+  Docker and AWS
+
+InsightForge AI — Multi-Agent RAG Platform for Enterprise Knowledge Automation
+• Created multi-agent RAG framework using LangChain, FastAPI, OpenAI APIs, and
+  Pinecone for intelligence-based document search and contextual questioning
+• Developed scalable pipelines for document ingestion, embeddings, vector search, and
+  semantic retrieval for large unstructured knowledge datasets
+• Implemented containerized AI systems on AWS using Docker and Kubernetes with
+  asynchronous inferencing pipelines
+
+Multi-Cloud Resource Optimizer
+• Created cloud-based resource optimization tool using Python, Docker, and Kubernetes
+  for scalable workload management on AWS and GCP
+• Applied live monitoring and auto-scaling functionality, achieving 20% reduction in
+  infrastructure expenditure
+• Implemented Kubernetes technology for deploying containers and enabling scalable
+  cloud applications
+
+================================================================================
+TECHNICAL SKILLS
+================================================================================
+
+Languages:
+  Python, Java, SQL, JavaScript, TypeScript, C++, C#
+
+Backend & Software Engineering:
+  Spring Boot, Django, FastAPI, REST APIs, API Integration, Microservices,
+  Distributed Systems, OOP, System Design, Multithreading, Concurrent Programming,
+  Asynchronous Processing
+
+Frontend & Full-Stack:
+  MERN Stack, React.js, Node.js, Express.js, HTML5, CSS3
+
+Cloud & Infrastructure:
+  AWS (S3, EC2, Lambda, CloudWatch), GCP, Docker, Kubernetes, Terraform,
+  CI/CD, Container Orchestration, Monitoring & Logging
+
+Data Engineering:
+  ETL/ELT, Data Pipelines, Apache Airflow, Kafka, Apache Spark, Workflow
+  Orchestration, Batch Processing, Real-Time Streaming, Data Processing
+
+GenAI & Machine Learning:
+  LangChain, OpenAI APIs, RAG Pipelines, Vector Databases (Pinecone/FAISS/ChromaDB),
+  Scikit-learn, PyTorch, Pandas, NumPy, NLP, GitHub Copilot
+
+Databases & Tools:
+  PostgreSQL, MongoDB, MySQL, Git, Linux
 
 ================================================================================

@@ -12,6 +12,7 @@
     "framer-motion": "^10.16.0",
     "gsap": "^3.14.2",
     "intersection-observer": "^0.12.0",
+    "jspdf": "^4.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-force-graph-2d": "^1.29.1",
