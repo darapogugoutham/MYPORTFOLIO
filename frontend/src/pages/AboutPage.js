@@ -14,11 +14,7 @@ function AboutPage() {
         const controller = new AbortController();
         const timeout = setTimeout(() => controller.abort(), 8000);
         
-        const [aboutRes, dataRes, skillsRes] = await Promise.all([
-          axios.get(`${API_BASE_URL}/api/about`, { signal: controller.signal }),
-          axios.get(`${API_BASE_URL}/api/data`, { signal: controller.signal }),
-          axios.get(`${API_BASE_URL}/api/skills`, { signal: controller.signal }),
-        ]);
+        const aboutRes = await axios.get(`${API_BASE_URL}/api/about`, { signal: controller.signal });
         
         clearTimeout(timeout);
 
