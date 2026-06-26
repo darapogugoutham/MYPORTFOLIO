@@ -1,24 +1,21 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import InteractiveCard from '../components/InteractiveCard';
 import ProjectModal from '../components/ProjectModal';
 import AnimatedCounter from '../components/AnimatedCounter';
 import GalaxySection from '../components/GalaxySection';
 import SecurityBadges from '../components/SecurityBadges';
+import portfolioData from '../data/portfolioData';
 import './HomePage.css';
-
-// Configure API base URL
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:4000';
 
 function HomePage() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [stats, setStats] = useState({
-    projects: 0,
-    technologies: 0,
-    experience: 0,
-  });
+  const stats = {
+    projects: portfolioData.projects.length,
+    technologies: new Set(Object.values(portfolioData.skills).flat()).size,
+    experience: 4,
+  };
   const navigate = useNavigate();
   const featuredSectionRef = useRef(null);
   const carouselRef = useRef(null);
@@ -210,107 +207,6 @@ function HomePage() {
       });
     }
   };
-
-  // Fetch portfolio data and calculate stats dynamically
-  useEffect(() => {
-    const fetchStats = async (retries = 3) => {
-      try {
-        const controller = new AbortController();
-        const timeout = setTimeout(() => controller.abort(), 8000); // 8 second timeout
-        
-        const [dataRes, experienceRes, skillsRes] = await Promise.all([
-          axios.get(`${API_BASE_URL}/api/data`, { signal: controller.signal }),
-          axios.get(`${API_BASE_URL}/api/experience`, { signal: controller.signal }),
-          axios.get(`${API_BASE_URL}/api/skills`, { signal: controller.signal }),
-        ]);
-        
-        clearTimeout(timeout);
-
-        // Count total projects
-        const projectCount = dataRes.data.projects?.length || 7;
-
-        // Count total unique technologies
-        const allTechs = new Set();
-        if (typeof skillsRes.data === 'object') {
-          Object.values(skillsRes.data).forEach((categoryArray) => {
-            if (Array.isArray(categoryArray)) {
-              categoryArray.forEach((tech) => allTechs.add(tech));
-            }
-          });
-        }
-        const techCount = allTechs.size || 25;
-
-        // Calculate total years of experience (sum all roles, no double-counting)
-        let totalMonths = 0;
-        if (Array.isArray(experienceRes.data)) {
-          experienceRes.data.forEach((job) => {
-            const dateParts = job.dates?.split(' - ');
-            if (dateParts && dateParts.length === 2) {
-              // Parse "Month Year" format (e.g., "Jan 2022" or "Sept 2025")
-              const monthYearRegex = /(\w+)\s+(\d{4})/;
-              
-              const startMatch = dateParts[0].trim().match(monthYearRegex);
-              const endPart = dateParts[1].trim().toLowerCase();
-              const endMatch = endPart.match(monthYearRegex);
-              
-              if (startMatch) {
-                const monthNames = {
-                  'jan': 0, 'feb': 1, 'mar': 2, 'apr': 3, 'may': 4, 'jun': 5,
-                  'jul': 6, 'aug': 7, 'sep': 8, 'sept': 8, 'oct': 9, 'nov': 10, 'dec': 11
-                };
-                
-                const startMonth = monthNames[startMatch[1].toLowerCase()];
-                const startYear = parseInt(startMatch[2], 10);
-                const startDate = new Date(startYear, startMonth, 1);
-                
-                let endDate;
-                // Check if end date contains "present" (case-insensitive)
-                if (endPart.includes('present') || endPart === 'present') {
-                  endDate = new Date(); // Today's date
-                } else if (endMatch) {
-                  const endMonth = monthNames[endMatch[1].toLowerCase()];
-                  const endYear = parseInt(endMatch[2], 10);
-                  endDate = new Date(endYear, endMonth, 1);
-                } else {
-                  return;
-                }
-                
-                // Calculate months between dates (inclusive of end month)
-                const months = (endDate.getFullYear() - startDate.getFullYear()) * 12 + 
-                              (endDate.getMonth() - startDate.getMonth()) + 1;
-                totalMonths += Math.max(months, 0);
-              }
-            }
-          });
-        }
-        const yearsExperience = Math.round((totalMonths / 12) * 10) / 10 || 2;
-
-        setStats({
-          projects: projectCount,
-          technologies: techCount,
-          experience: yearsExperience,
-        });
-      } catch (error) {
-        console.error('Error fetching stats:', error);
-        
-        // If it's a timeout/network error and we have retries left, try again
-        if (retries > 0 && (error.code === 'ECONNABORTED' || error.message === 'Network Error')) {
-          console.log(`Server warming up... Retrying in ${(4 - retries) * 2}s (${3 - retries + 1}/3)`);
-          setTimeout(() => fetchStats(retries - 1), (4 - retries) * 2000);
-          return;
-        }
-        
-        // Fallback to default values
-        setStats({
-          projects: 6,
-          technologies: 50,
-          experience: 2,
-        });
-      }
-    };
-
-    fetchStats();
-  }, []);
 
   const handleGetInTouch = () => {
     navigate('/contact');

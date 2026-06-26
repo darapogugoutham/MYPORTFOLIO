@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { FiGithub, FiLinkedin, FiMail, FiPhone } from 'react-icons/fi';
 import './ContactPage.css';
-
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:4000';
 
 function ContactPage() {
   const [formData, setFormData] = useState({
@@ -26,16 +23,16 @@ function ContactPage() {
     e.preventDefault();
     setLoading(true);
 
-    try {
-      await axios.post(`${API_BASE_URL}/api/contact`, formData);
-      setSuccess(true);
-      setFormData({ name: '', email: '', message: '' });
-      setTimeout(() => setSuccess(false), 5000);
-    } catch (error) {
-      console.error('Error submitting form:', error);
-    } finally {
-      setLoading(false);
-    }
+    const subject = encodeURIComponent(`Portfolio Contact from ${formData.name}`);
+    const body = encodeURIComponent(
+      `Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`
+    );
+
+    window.location.href = `mailto:darapogugoutham@gmail.com?subject=${subject}&body=${body}`;
+    setSuccess(true);
+    setFormData({ name: '', email: '', message: '' });
+    setTimeout(() => setSuccess(false), 5000);
+    setLoading(false);
   };
 
   const links = [
@@ -101,7 +98,7 @@ function ContactPage() {
 
               {success && (
                 <div className="success-message">
-                  ✓ Message sent successfully! I'll get back to you soon.
+                  ✓ Your email app is opening with the message ready to send.
                 </div>
               )}
             </form>

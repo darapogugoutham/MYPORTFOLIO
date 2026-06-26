@@ -1,9 +1,47 @@
 import React, { useState, useRef, useEffect } from 'react';
-import axios from 'axios';
 import { FiX, FiSend } from 'react-icons/fi';
+import portfolioData from '../data/portfolioData';
 import './AIAssistant.css';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:4000';
+const getLocalAssistantResponse = (query) => {
+  const normalizedQuery = query.toLowerCase();
+  const { about, projects, experience, skills, certifications } = portfolioData;
+
+  if (normalizedQuery.includes('skill') || normalizedQuery.includes('technolog') || normalizedQuery.includes('stack')) {
+    const topSkills = [
+      ...skills.languages.slice(0, 5),
+      ...skills.backend.slice(0, 5),
+      ...skills.dataEngineering.slice(0, 4),
+      ...skills.genAIML.slice(0, 4),
+    ];
+    return `Goutham works across software engineering, data engineering, and GenAI systems. Key technologies include ${topSkills.join(', ')}. You can see the full breakdown on the Skills page.`;
+  }
+
+  if (normalizedQuery.includes('project') || normalizedQuery.includes('built') || normalizedQuery.includes('work')) {
+    const featuredProjects = projects.slice(0, 4).map((project) => project.title).join('; ');
+    return `Some featured projects are ${featuredProjects}. They cover real-time data pipelines, distributed backend systems, RAG platforms, and cloud optimization. The Projects page has full case-study details.`;
+  }
+
+  if (normalizedQuery.includes('experience') || normalizedQuery.includes('job') || normalizedQuery.includes('role')) {
+    const roles = experience.slice(0, 4).map((job) => `${job.role} at ${job.company}`).join('; ');
+    return `Goutham's experience includes ${roles}. His work focuses on backend systems, automation, data pipelines, ML systems, and cloud deployment.`;
+  }
+
+  if (normalizedQuery.includes('education') || normalizedQuery.includes('degree') || normalizedQuery.includes('college') || normalizedQuery.includes('university')) {
+    return `Goutham is pursuing a ${about.education.degree} at ${about.education.school} with a GPA of ${about.education.gpa}. He also completed a ${about.previousEducation.degree} at ${about.previousEducation.school}.`;
+  }
+
+  if (normalizedQuery.includes('cert')) {
+    const certList = certifications.map((cert) => cert.title).slice(0, 4).join('; ');
+    return `Goutham has certifications including ${certList}. The Certifications page lists all credentials and related skills.`;
+  }
+
+  if (normalizedQuery.includes('contact') || normalizedQuery.includes('email') || normalizedQuery.includes('hire')) {
+    return `You can reach Goutham at ${portfolioData.contact.email}, or use the Contact page for email, LinkedIn, GitHub, LeetCode, and HackerRank links.`;
+  }
+
+  return `${about.name} is a ${about.role}. ${about.headline} Try asking about projects, skills, experience, education, or certifications.`;
+};
 
 function AIAssistant({ isOpen, setIsOpen }) {
   const [messages, setMessages] = useState([
@@ -26,10 +64,11 @@ function AIAssistant({ isOpen, setIsOpen }) {
     scrollToBottom();
   }, [messages]);
 
-  const handleSendMessage = async () => {
-    if (!input.trim()) return;
+  const handleSendMessage = async (messageOverride) => {
+    const nextInput = messageOverride || input;
+    if (!nextInput.trim()) return;
 
-    const userMessage = input.trim();
+    const userMessage = nextInput.trim();
     setInput('');
     setLoading(true);
 
@@ -45,17 +84,13 @@ function AIAssistant({ isOpen, setIsOpen }) {
     ]);
 
     try {
-      const response = await axios.post(`${API_BASE_URL}/api/chat`, {
-        message: userMessage,
-      });
-
-      // Add bot response
+      const responseText = getLocalAssistantResponse(userMessage);
       setMessages((prev) => [
         ...prev,
         {
           id: Date.now() + 1,
           type: 'bot',
-          text: response.data.message,
+          text: responseText,
           timestamp: new Date(),
         },
       ]);
@@ -66,7 +101,7 @@ function AIAssistant({ isOpen, setIsOpen }) {
         {
           id: Date.now() + 1,
           type: 'bot',
-          text: 'Sorry, I encountered an error. Please try again later.',
+          text: 'Sorry, I could not answer that right now. Try asking about projects, skills, experience, or contact details.',
           timestamp: new Date(),
         },
       ]);
@@ -124,11 +159,7 @@ function AIAssistant({ isOpen, setIsOpen }) {
                     key={idx}
                     className="quick-btn"
                     onClick={() => {
-                      setInput(question);
-                      setTimeout(() => {
-                        setInput('');
-                        handleSendMessage();
-                      }, 100);
+                      handleSendMessage(question);
                     }}
                   >
                     {question}

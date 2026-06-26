@@ -1,43 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
+import portfolioData from '../data/portfolioData';
 import './CertificationsPage.css';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:4000';
-
 function CertificationsPage() {
-  const [certifications, setCertifications] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const certifications = portfolioData.certifications;
   const [selectedCategory, setSelectedCategory] = useState('All');
-
-  useEffect(() => {
-    const fetchCertifications = async () => {
-      try {
-        const response = await axios.get(`${API_BASE_URL}/api/certifications`);
-        setCertifications(response.data);
-        setLoading(false);
-      } catch (err) {
-        console.error('Error fetching certifications:', err);
-        setError('Failed to load certifications');
-        setLoading(false);
-      }
-    };
-
-    fetchCertifications();
-  }, []);
 
   const categories = ['All', ...new Set(certifications.map(cert => cert.category))];
   const filteredCerts = selectedCategory === 'All' 
     ? certifications 
     : certifications.filter(cert => cert.category === selectedCategory);
-
-  if (loading) {
-    return <div className="certifications-page"><p>Loading certifications...</p></div>;
-  }
-
-  if (error) {
-    return <div className="certifications-page"><p className="error">{error}</p></div>;
-  }
 
   return (
     <div className="certifications-page">

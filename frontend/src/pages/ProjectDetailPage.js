@@ -1,38 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
 import { FiGithub, FiExternalLink } from 'react-icons/fi';
+import portfolioData from '../data/portfolioData';
 import './ProjectDetailPage.css';
-
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:4000';
 
 function ProjectDetailPage() {
   const { id } = useParams();
-  const [project, setProject] = React.useState(null);
-  const [loading, setLoading] = React.useState(true);
-
-  useEffect(() => {
-    const fetchProject = async () => {
-      try {
-        const response = await axios.get(`${API_BASE_URL}/api/projects/${id}`);
-        setProject(response.data);
-      } catch (error) {
-        console.error('Error fetching project:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProject();
-  }, [id]);
-
-  if (loading) {
-    return (
-      <div className="loading-container">
-        <div className="loading"></div>
-      </div>
-    );
-  }
+  const project = portfolioData.projects.find((item) => item.id === id);
 
   if (!project) {
     return <div className="error-container">Project not found</div>;

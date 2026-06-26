@@ -1,43 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React from 'react';
+import portfolioData from '../data/portfolioData';
 import './AboutPage.css';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:4000';
-
 function AboutPage() {
-  const [about, setAbout] = useState(null);
-  const [dynamicStats, setDynamicStats] = useState(null);
-
-  useEffect(() => {
-    const fetchAbout = async () => {
-      try {
-        const controller = new AbortController();
-        const timeout = setTimeout(() => controller.abort(), 8000);
-        
-        const aboutRes = await axios.get(`${API_BASE_URL}/api/about`, { signal: controller.signal });
-        
-        clearTimeout(timeout);
-
-        setAbout(aboutRes.data);
-        // Use stats from the about data
-        setDynamicStats(aboutRes.data.stats || []);
-      } catch (error) {
-        console.error('Error fetching about:', error);
-        // Fallback to static about data if API fails
-        try {
-          const response = await axios.get(`${API_BASE_URL}/api/about`);
-          setAbout(response.data);
-          setDynamicStats(response.data.stats);
-        } catch (fallbackError) {
-          console.error('Fallback error:', fallbackError);
-        }
-      }
-    };
-
-    fetchAbout();
-  }, []);
-
-  if (!about) return <div>Loading...</div>;
+  const about = portfolioData.about;
+  const dynamicStats = about.stats || [];
 
   return (
     <main className="about-page section-padding">

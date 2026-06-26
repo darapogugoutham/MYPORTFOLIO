@@ -1,26 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React from 'react';
+import portfolioData from '../data/portfolioData';
 import './SkillsPage.css';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:4000';
-
 function SkillsPage() {
-  const [skills, setSkills] = useState(null);
-
-  useEffect(() => {
-    const fetchSkills = async () => {
-      try {
-        const response = await axios.get(`${API_BASE_URL}/api/skills`);
-        setSkills(response.data);
-      } catch (error) {
-        console.error('Error fetching skills:', error);
-      }
-    };
-
-    fetchSkills();
-  }, []);
-
-  if (!skills) return <div>Loading...</div>;
+  const skills = portfolioData.skills;
 
   const skillCategories = [
     { name: 'Languages', skills: skills.languages, color: '#00d9ff' },
@@ -28,9 +11,9 @@ function SkillsPage() {
     { name: 'Backend', skills: skills.backend, color: '#00d9ff' },
     { name: 'Cloud/DevOps', skills: skills.cloud, color: '#a855f7' },
     { name: 'Databases', skills: skills.databases, color: '#00d9ff' },
-    { name: 'Data Tools', skills: skills.dataTools, color: '#a855f7' },
-    { name: 'ML/AI', skills: skills.ml, color: '#00d9ff' },
-    { name: 'Other', skills: skills.other, color: '#a855f7' },
+    { name: 'Data Engineering', skills: skills.dataEngineering, color: '#a855f7' },
+    { name: 'GenAI & ML', skills: skills.genAIML, color: '#00d9ff' },
+    { name: 'Tools', skills: skills.tools, color: '#a855f7' },
   ];
 
   return (

@@ -1,27 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import portfolioData from '../data/portfolioData';
 import './ProjectsPage.css';
 
-// Configure API base URL
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:4000';
-
 function ProjectsPage() {
-  const [projects, setProjects] = useState([]);
+  const projects = portfolioData.projects;
   const [filter, setFilter] = useState('All');
-
-  useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const response = await axios.get(`${API_BASE_URL}/api/projects`);
-        setProjects(response.data);
-      } catch (error) {
-        console.error('Error fetching projects:', error);
-      }
-    };
-
-    fetchProjects();
-  }, []);
 
   const categories = ['All', 'Full Stack', 'ML/AI', 'Data Engineering', 'Cloud/DevOps', 'Research'];
 

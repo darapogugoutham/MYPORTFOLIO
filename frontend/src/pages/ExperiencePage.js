@@ -1,24 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React from 'react';
+import portfolioData from '../data/portfolioData';
 import './ExperiencePage.css';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:4000';
-
 function ExperiencePage() {
-  const [experience, setExperience] = useState([]);
-
-  useEffect(() => {
-    const fetchExperience = async () => {
-      try {
-        const response = await axios.get(`${API_BASE_URL}/api/experience`);
-        setExperience(response.data);
-      } catch (error) {
-        console.error('Error fetching experience:', error);
-      }
-    };
-
-    fetchExperience();
-  }, []);
+  const experience = portfolioData.experience;
 
   return (
     <main className="experience-page section-padding">
