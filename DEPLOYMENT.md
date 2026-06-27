@@ -1,7 +1,7 @@
 # Deployment Guide
 
 This portfolio is deployed on:
-- **Frontend**: Vercel (https://goutham-myportfolio.vercel.app)
+- **Frontend**: Vercel (https://goutham-dev.vercel.app)
 - **Backend**: Render
 
 ## How to Update

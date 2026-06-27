@@ -121,7 +121,7 @@ export const brainConfig = {
         },
         {
           label: 'Portfolio',
-          url: 'https://goutham-myportfolio.vercel.app',
+          url: 'https://goutham-dev.vercel.app',
           icon: '🌐',
         },
       ],

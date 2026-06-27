@@ -163,7 +163,7 @@ const portfolioData = {
       shortDescription: 'React portfolio with AI assistant, 3D project galaxy, and dynamic project/experience data',
       image: '/images/portfolio.png',
       github: 'https://github.com/darapogugoutham/MYPORTFOLIO',
-      demo: 'https://goutham-myportfolio.vercel.app',
+      demo: 'https://goutham-dev.vercel.app',
       problem: 'A static resume does not show the breadth of software, data, AI, and cloud work clearly enough for recruiters and collaborators.',
       role: 'Full-stack developer - built the React frontend, Node backend, RAG-style assistant, project pages, and deployment configuration',
       approach: 'Created a data-driven portfolio with reusable project and experience records, interactive visual sections, downloadable resume support, and Vercel deployment.',

@@ -274,5 +274,5 @@ This portfolio is personal work and not licensed for public use.
 
 For inquiries about this portfolio or to discuss opportunities:
 - Email: goutham.darapogu@example.com
-- LinkedIn: linkedin.com/in/yourusername
-- GitHub: github.com/yourusername
+- LinkedIn: linkedin.com/in/goutham-darapogu-184004219
+- GitHub: github.com/darapogugoutham
