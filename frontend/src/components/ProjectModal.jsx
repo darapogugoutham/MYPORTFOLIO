@@ -4,6 +4,10 @@ import './ProjectModal.css';
 function ProjectModal({ isOpen, project, onClose }) {
   if (!isOpen || !project) return null;
 
+  const impactItems = Array.isArray(project.impact)
+    ? project.impact
+    : project.results?.map((result) => `${result.metric}: ${result.change}`) || [project.impact].filter(Boolean);
+
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
@@ -24,14 +28,14 @@ function ProjectModal({ isOpen, project, onClose }) {
           {/* Solution Section */}
           <div className="modal-section">
             <h3>💡 Solution</h3>
-            <p>{project.solution}</p>
+            <p>{project.solution || project.approach}</p>
           </div>
 
           {/* Impact Section */}
           <div className="modal-section">
             <h3>📊 Impact</h3>
             <ul className="impact-list">
-              {project.impact && project.impact.map((item, idx) => (
+              {impactItems.map((item, idx) => (
                 <li key={idx}>{item}</li>
               ))}
             </ul>
@@ -51,8 +55,8 @@ function ProjectModal({ isOpen, project, onClose }) {
         </div>
 
         <div className="modal-footer">
-          {project.liveDemo && (
-            <a href={project.liveDemo} className="modal-btn btn-primary">
+          {(project.liveDemo || project.demo) && (
+            <a href={project.liveDemo || project.demo} className="modal-btn btn-primary">
               🚀 Live Demo
             </a>
           )}

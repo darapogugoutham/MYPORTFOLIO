@@ -1,4 +1,5 @@
 // Brain portfolio configuration and content data
+import portfolioData from './portfolioData';
 
 export const brainConfig = {
   // Hotspot positions in 3D space
@@ -55,137 +56,73 @@ export const brainConfig = {
   // Content data
   content: {
     about: {
-      bio: 'I\'m a full-stack developer passionate about creating innovative digital experiences. My approach to technology is deeply rooted in how people think and interact with the world around them. Every project I undertake is a reflection of my problem-solving methodology and creative mindset.',
-      highlights: [
-        '8+ years of software development experience',
-        'Full-stack expertise in React, Node.js, and Python',
-        'Specialization in AI integration and automation',
-        'Published open-source projects',
-        'Tech speaker and community contributor',
-        'Continuous learner and innovator',
-      ],
+      bio: portfolioData.about.bio,
+      highlights: portfolioData.about.highlights,
     },
 
     skills: {
       categories: [
         {
           name: 'Frontend',
-          items: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Three.js', 'GSAP'],
+          items: portfolioData.skills.frontend,
         },
         {
           name: 'Backend',
-          items: ['Node.js', 'Express', 'Python', 'Django', 'PostgreSQL', 'MongoDB'],
+          items: portfolioData.skills.backend,
         },
         {
           name: 'AI/ML',
-          items: ['LLMs', 'OpenAI API', 'RAG Systems', 'Prompt Engineering', 'Fine-tuning'],
+          items: portfolioData.skills.genAIML,
         },
         {
           name: 'Tools & DevOps',
-          items: ['Git', 'Docker', 'AWS', 'Vercel', 'CI/CD', 'Linux'],
+          items: [...portfolioData.skills.cloud, ...portfolioData.skills.tools],
         },
         {
-          name: 'Specializations',
-          items: ['3D Web', 'Real-time Systems', 'Animation', 'API Design', 'System Architecture'],
+          name: 'Data Engineering',
+          items: portfolioData.skills.dataEngineering,
         },
       ],
     },
 
     projects: {
-      items: [
-        {
-          title: 'AI Research Platform',
-          tech: 'React, Node.js, OpenAI API, PostgreSQL',
-          description: 'Built a comprehensive platform for researchers to leverage AI for literature analysis and data synthesis with real-time collaboration.',
-        },
-        {
-          title: '3D Interactive Dashboard',
-          tech: 'Three.js, React Three Fiber, GSAP',
-          description: 'Created an immersive 3D data visualization dashboard with interactive elements and smooth animations.',
-        },
-        {
-          title: 'Automated Workflow Engine',
-          tech: 'Node.js, Python, Redis, Webhooks',
-          description: 'Engineered an event-driven system for automating complex business processes with 99.9% uptime.',
-        },
-        {
-          title: 'Real-time Chat Application',
-          tech: 'Socket.io, React, Express, MongoDB',
-          description: 'Developed a scalable chat platform supporting 10k+ concurrent users with end-to-end encryption.',
-        },
-        {
-          title: 'Machine Learning Pipeline',
-          tech: 'Python, TensorFlow, Kubernetes, Apache Airflow',
-          description: 'Orchestrated a distributed ML training pipeline processing 100GB+ of data daily.',
-        },
-        {
-          title: 'Cloud Migration Suite',
-          tech: 'AWS, Terraform, Python, Jenkins',
-          description: 'Automated migration of legacy systems to cloud infrastructure with zero downtime.',
-        },
-      ],
+      items: portfolioData.projects.map((project) => ({
+        title: project.title,
+        tech: project.technologies.join(', '),
+        description: project.description,
+      })),
     },
 
     experience: {
-      items: [
-        {
-          title: 'Senior Full-Stack Engineer',
-          company: 'TechCorp AI',
-          date: '2022 - Present',
-          description: 'Leading development of AI-powered products, mentoring junior engineers, and architecting scalable systems.',
-        },
-        {
-          title: 'Full-Stack Developer',
-          company: 'Digital Innovations Inc',
-          date: '2020 - 2022',
-          description: 'Built and maintained production applications serving 100k+ users, implemented CI/CD pipelines, and optimized performance.',
-        },
-        {
-          title: 'Junior Developer',
-          company: 'StartUp Labs',
-          date: '2018 - 2020',
-          description: 'Launched MVP for venture-funded startup, collaborated with designers and product managers, gained full-stack expertise.',
-        },
-        {
-          title: 'Freelance Developer',
-          company: 'Self-employed',
-          date: '2017 - 2018',
-          description: 'Developed custom web applications for clients across diverse industries, managed projects from conception to deployment.',
-        },
-      ],
+      items: portfolioData.experience.map((job) => ({
+        title: job.role,
+        company: job.company,
+        date: job.dates,
+        description: job.description,
+      })),
     },
 
     contact: {
       links: [
         {
           label: 'GitHub',
-          url: 'https://github.com',
+          url: portfolioData.contact.github,
           icon: '🐙',
         },
         {
           label: 'LinkedIn',
-          url: 'https://linkedin.com',
+          url: portfolioData.contact.linkedin,
           icon: '💼',
         },
         {
-          label: 'Twitter',
-          url: 'https://twitter.com',
-          icon: '🐦',
-        },
-        {
           label: 'Email',
-          url: 'mailto:hello@example.com',
+          url: `mailto:${portfolioData.contact.email}`,
           icon: '✉️',
         },
         {
           label: 'Portfolio',
-          url: 'https://myportfolio.com',
+          url: 'https://goutham-myportfolio.vercel.app',
           icon: '🌐',
-        },
-        {
-          label: 'Codepen',
-          url: 'https://codepen.io',
-          icon: '🎨',
         },
       ],
     },

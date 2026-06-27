@@ -1,59 +1,19 @@
 import React, { useMemo, useRef, useState, useEffect } from "react";
 import ForceGraph2D from "react-force-graph-2d";
+import portfolioData from "../data/portfolioData";
 import "./NeuralNetworkPortfolio.css";
 
-const portfolioItems = [
-  {
-    id: "EmotiveChat",
-    type: "project",
-    description:
-      "Emotion-aware chatbot using BERT, Flask, BlenderBot, and response ranking. Analyzes user sentiment and tailors responses accordingly.",
-    tech: ["React", "Flask", "BERT", "NLP", "HuggingFace"],
-    impact: "Built an intelligent chatbot with emotion-aware response flow that improves user engagement by 35%.",
-    link: "#",
-    color: "#22d3ee",
-  },
-  {
-    id: "Electro-Mart",
-    type: "project",
-    description:
-      "Microservices-based e-commerce platform with frontend, cart, product catalog, and backend APIs. Handles 10K+ concurrent users.",
-    tech: ["Angular", "Spring Boot", "MySQL", "Docker", "Microservices"],
-    impact: "Designed a scalable e-commerce system with modular services achieving 99.9% uptime.",
-    link: "#",
-    color: "#a78bfa",
-  },
-  {
-    id: "Food Calorie Estimation",
-    type: "project",
-    description:
-      "Deep learning and computer vision project for estimating food calories from images using CNN models trained on 50K+ images.",
-    tech: ["Python", "CNN", "Computer Vision", "Deep Learning", "TensorFlow"],
-    impact: "Combined food recognition with calorie approximation achieving 92% accuracy in real-world scenarios.",
-    link: "#",
-    color: "#38bdf8",
-  },
-  {
-    id: "Learnova",
-    type: "project",
-    description:
-      "AI-powered learning app for intelligent summaries, flashcards, and personalized study planning using LLMs.",
-    tech: ["React", "Python", "Supabase", "LLMs", "Prompt Engineering"],
-    impact: "Built an AI study companion for personalized learning that reduces study time by 40%.",
-    link: "#",
-    color: "#06b6d4",
-  },
-  {
-    id: "Multi-Cloud Optimizer",
-    type: "project",
-    description:
-      "Cost optimization platform across AWS, Azure, and GCP with real-time analytics and ML-based resource predictions.",
-    tech: ["Python", "Kubernetes", "AWS", "Azure", "GCP", "Machine Learning"],
-    impact: "Achieved 40% reduction in cloud costs for enterprise clients through intelligent resource scaling.",
-    link: "#",
-    color: "#10b981",
-  },
-];
+const graphColors = ["#22d3ee", "#a78bfa", "#38bdf8", "#06b6d4", "#10b981", "#f59e0b", "#ec4899", "#84cc16", "#ef4444", "#14b8a6", "#8b5cf6"];
+
+const portfolioItems = portfolioData.projects.map((project, index) => ({
+  id: project.title,
+  type: "project",
+  description: project.description,
+  tech: project.technologies.slice(0, 6),
+  impact: project.impact,
+  link: project.github,
+  color: graphColors[index % graphColors.length],
+}));
 
 function buildGraphData(items) {
   const nodes = [];

@@ -18,12 +18,12 @@ const getLocalAssistantResponse = (query) => {
   }
 
   if (normalizedQuery.includes('project') || normalizedQuery.includes('built') || normalizedQuery.includes('work')) {
-    const featuredProjects = projects.slice(0, 4).map((project) => project.title).join('; ');
-    return `Some featured projects are ${featuredProjects}. They cover real-time data pipelines, distributed backend systems, RAG platforms, and cloud optimization. The Projects page has full case-study details.`;
+    const featuredProjects = projects.map((project) => project.title).join('; ');
+    return `Goutham has ${projects.length} public GitHub projects featured here: ${featuredProjects}. They cover full-stack apps, AI operations, TypeScript tools, data engineering pipelines, cloud resource allocation, ML systems, and NLP chatbots. The Projects page has full case-study details.`;
   }
 
   if (normalizedQuery.includes('experience') || normalizedQuery.includes('job') || normalizedQuery.includes('role')) {
-    const roles = experience.slice(0, 4).map((job) => `${job.role} at ${job.company}`).join('; ');
+    const roles = experience.map((job) => `${job.role} at ${job.company}`).join('; ');
     return `Goutham's experience includes ${roles}. His work focuses on backend systems, automation, data pipelines, ML systems, and cloud deployment.`;
   }
 
